@@ -9,6 +9,7 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: superSecretPassword
       MYSQL_ROOT_HOST: '%'
+      MYSQL_DATABASE: visma_database
     volumes:
       - visma_backend_mysql:/var/lib/mysql
 
