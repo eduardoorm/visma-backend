@@ -1,0 +1,25 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Division {
+  id              Int        @id @default(autoincrement())
+  name            String     @unique @db.VarChar(45)
+  parentId        Int? 
+  parent          Division?  @relation("DivisionToSubdivisions", fields: [parentId], references: [id], onDelete: Cascade)
+  subdivisions    Division[] @relation("DivisionToSubdivisions")
+  collaborators   Int        @db.UnsignedInt
+  level           Int        @db.UnsignedInt
+  ambassadorName  String?    @db.VarChar(100)
+  createdAt       DateTime   @default(now())
+  updatedAt       DateTime   @updatedAt
+  
+  @@index([createdAt])
+  @@index([level])
+  @@map("divisions")
+}
