@@ -1,8 +1,26 @@
 version: '3'
 services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: visma-backend-api
+    restart: always
+    ports:
+      - '3000:3000'
+    environment:
+      - NODE_ENV=development
+      - DATABASE_URL=mysql://root:superSecretPassword@db:3306/visma_database
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    depends_on:
+      - db
+    command: npm run start:dev
+
   db:
     image: mysql:8.0
-    container_name: visma-backend-container
+    container_name: visma-backend-db
     restart: always
     ports:
       - '3306:3306'
