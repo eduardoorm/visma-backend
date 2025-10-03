@@ -12,6 +12,9 @@ RUN npm ci
 # Copiar el resto de los archivos de la aplicación
 COPY . .
 
+# Compilar la aplicación
+RUN npm run build
+
 # Dar permisos de ejecución al script de inicio
 RUN chmod +x ./start_up.sh
 
