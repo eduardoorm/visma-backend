@@ -16,7 +16,7 @@ COPY . .
 RUN chmod +x ./start_up.sh
 
 # Puerto que expondrá la aplicación
-EXPOSE 3000
+EXPOSE 8080
 
 # Comando para ejecutar la aplicación
 CMD ["./start_up.sh"]
