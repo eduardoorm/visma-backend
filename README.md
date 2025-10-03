@@ -164,7 +164,120 @@ chmod +x start_up.sh
 
 **URL Producción**: `https://visma-backend-lzqunom2jq-uc.a.run.app/api/`
 
-## 🔒 CORS
+
+### Endpoints Disponibles en Producción
+
+### Listar todas las divisiones:
+```bash
+GET https://visma-backend-lzqunom2jq-uc.a.run.app/api/divisions/
+```
+
+#### 1. 🆕 Crear División
+
+```bash
+POST https://visma-backend-lzqunom2jq-uc.a.run.app/api/divisions
+Content-Type: application/json
+
+{
+  "name": "Technology Department",
+  "level": 1,
+  "collaborators": 50,
+  "ambassadorName": "John Smith"
+}
+```
+
+#### 2. 📋 Listar Divisiones (con filtros)
+
+```bash
+GET https://visma-backend-lzqunom2jq-uc.a.run.app/api/divisions?searchTerm=tech&level=1&page=1&limit=10&sortBy=name&sortOrder=asc
+```
+
+**Parámetros disponibles:**
+- `searchTerm`: Buscar por nombre o embajador
+- `level`: Filtrar por nivel jerárquico
+- `collaborators`: Filtrar por número de colaboradores
+- `parentId`: Filtrar por división padre
+- `page`: Número de página (default: 1)
+- `limit`: Elementos por página (default: 10)
+- `sortBy`: Campo para ordenar (name, level, collaborators, createdAt)
+- `sortOrder`: Orden (asc/desc)
+
+#### 3. 🔍 Obtener División por ID
+
+```bash
+GET https://visma-backend-lzqunom2jq-uc.a.run.app/api/divisions/35
+```
+
+#### 4. 🌳 Obtener Subdivisiones
+
+```bash
+GET https://visma-backend-lzqunom2jq-uc.a.run.app/api/divisions/35/subdivisions
+```
+
+#### 5. ✏️ Actualizar División
+
+```bash
+PUT https://visma-backend-lzqunom2jq-uc.a.run.app/api/divisions/1
+Content-Type: application/json
+
+{
+  "name": "Technology Division Updated",
+  "collaborators": 75,
+  "ambassadorName": "John Smith Updated"
+}
+```
+
+#### 6. 🗑️ Eliminar División
+
+```bash
+DELETE https://visma-backend-lzqunom2jq-uc.a.run.app/api/divisions/1
+```
+
+**Actualización Parcial:**
+```json
+{
+  "collaborators": 30,
+  "ambassadorName": "New Ambassador"
+}
+```
+
+### Respuestas de Ejemplo
+
+**Éxito (200 OK):**
+```json
+{
+  "id": 1,
+  "name": "Technology Department",
+  "level": 1,
+  "collaborators": 50,
+  "parentId": null,
+  "ambassadorName": "John Smith",
+  "createdAt": "2025-10-04T00:00:00.000Z",
+  "updatedAt": "2025-10-04T00:00:00.000Z"
+}
+```
+
+**Lista con Paginación:**
+```json
+{
+  "data": [
+    {
+      "id": 1,
+      "name": "Technology",
+      "level": 1,
+      "collaborators": 50,
+      "ambassadorName": "John Smith"
+    }
+  ],
+  "meta": {
+    "total": 100,
+    "page": 1,
+    "limit": 10,
+    "totalPages": 10
+  }
+}
+```
+## �🔒 CORS
 
 Configurado para aceptar peticiones de:
 - `http://localhost:4200` (desarrollo)
