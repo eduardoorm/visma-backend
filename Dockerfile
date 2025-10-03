@@ -15,7 +15,7 @@ COPY . .
 # Compilar la aplicación
 RUN npm run build
 
-# Dar permisos de ejecución al script de inicio
+# Dar permisos de ejecución a los scripts de inicio
 RUN chmod +x ./start_up.sh
 
 # Puerto que expondrá la aplicación
