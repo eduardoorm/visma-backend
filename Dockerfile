@@ -1,4 +1,4 @@
-FROM node:18-alpine AS development
+FROM node:18-alpine AS production
 
 # Directorio de trabajo dentro del contenedor
 WORKDIR /usr/src/app
@@ -12,11 +12,11 @@ RUN npm ci
 # Copiar el resto de los archivos de la aplicación
 COPY . .
 
-# Generar el cliente Prisma
-RUN npx prisma generate
+# Dar permisos de ejecución al script de inicio
+RUN chmod +x ./start_up.sh
 
 # Puerto que expondrá la aplicación
 EXPOSE 3000
 
 # Comando para ejecutar la aplicación
-CMD ["npm", "run", "start:dev"]
+CMD ["./start_up.sh"]
