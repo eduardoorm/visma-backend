@@ -1,16 +1,16 @@
 #!/bin/sh
 
-# Generar el cliente de Prisma primero (antes de compilar)
+echo "Generating Prisma client..."
 npx prisma generate
 
-# Ejecutar migraciones de Prisma en producción
+echo "Running Prisma migrations..."
 npx prisma migrate deploy
 
-# Ejecutar semillas de datos (si está configurado en package.json)
+echo "Running database seeds..."
 npx prisma db seed
 
-# Compilar la aplicación
+echo "Building the application..."
 npm run build
 
-# Iniciar la aplicación en modo producción
+echo "Starting application in production mode..."
 npm run start:prod
